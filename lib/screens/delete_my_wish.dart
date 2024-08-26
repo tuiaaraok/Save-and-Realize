@@ -224,7 +224,7 @@ class CustomDialog extends StatelessWidget {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: new Text("Are you sure you\nwant to remove the\nwish?",
+                  child: new Text("Are you sure you\nwant to remove the wish?",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 30.0,

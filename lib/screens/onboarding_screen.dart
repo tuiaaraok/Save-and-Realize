@@ -67,7 +67,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         asset_image: 'assets/images/onboarding2.png',
                         title: 'Create your first wishlist',
                         subtitle:
-                            'Create your own collections\nof wishes and make them\ncome true!',
+                            "Organize your and your friends'\nwishes into collections for\nconvenience and quick access!",
                       ),
                     ],
                   ),
@@ -142,14 +142,14 @@ class WidgetForOnBoardingInfo extends StatelessWidget {
           ),
           SizedBox(height: 30.h),
           Text(
-            'Create your first wishlist',
+            title,
             textAlign: TextAlign.center,
             style: kTitleStyle,
           ),
           SizedBox(height: 15.h),
           Container(
             child: Text(
-              'Create your own collections\nof wishes and make them\ncome true!',
+              subtitle,
               textAlign: TextAlign.center,
               style: kSubtitleStyle,
             ),

@@ -140,10 +140,9 @@ class _InfoScreenState extends State<InfoScreen> {
                           // ···
                           final Uri emailLaunchUri = Uri(
                             scheme: 'mailto',
-                            path: 'smith@example.com',
+                            path: 'TravisJohnson9902@outlook.com',
                             query: encodeQueryParameters(<String, String>{
-                              'subject':
-                                  'Example Subject & Symbols are allowed!',
+                              '': '',
                             }),
                           );
                           try {
@@ -184,63 +183,6 @@ class _InfoScreenState extends State<InfoScreen> {
                               Expanded(
                                 child: Text(
                                   "Contact us",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20.sp),
-                                  textAlign:
-                                      TextAlign.center, // Центрируем текст
-                                ),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.white,
-                                size: 21.h,
-                              ),
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () async {
-                          final Uri _url = Uri.parse('https://flutter.dev');
-                          if (!await launchUrl(_url)) {
-                            throw Exception('Could not launch $_url');
-                          }
-                        },
-                        child: Container(
-                          width: 310.w,
-                          height: 55.h,
-                          decoration: BoxDecoration(
-                              color: Color(0xFF5545B8),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12.r))),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                width: 10.w,
-                              ),
-                              Image(
-                                image: AssetImage("assets/icons/Privacy.png"),
-                                color: Colors.white,
-                                fit: BoxFit.fitWidth,
-                                height: 30.w,
-                                width: 30.w,
-                              ),
-                              SizedBox(
-                                  width:
-                                      8), // Добавьте немного пространства между иконкой и текстом
-                              Expanded(
-                                child: Text(
-                                  "Privacy policy",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 20.sp),
                                   textAlign:
@@ -317,7 +259,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: 190.h,
+                      height: 260.h,
                     ),
                     Align(
                       alignment: Alignment.bottomRight,
