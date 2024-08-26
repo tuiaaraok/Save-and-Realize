@@ -64,7 +64,7 @@ class _DeleteMyWishState extends State<DeleteMyWish> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 170.h,
+                  height: 180.h,
                   width: 140.w,
                   decoration: BoxDecoration(
                     color: Color(0xFF5545B8).withOpacity(0.5),
@@ -201,7 +201,7 @@ class CustomDialog extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           Container(
-            height: 290.h,
+            height: 300.h,
             width: 310.w,
             padding: EdgeInsets.only(
               top: 18.0,

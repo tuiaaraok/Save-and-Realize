@@ -227,42 +227,49 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
   Padding buildProfileSection() {
     return Padding(
       padding: EdgeInsets.only(left: 29.w),
-      child: Container(
-        width: 236.w,
-        child: ListTile(
-          contentPadding: EdgeInsets.all(0),
-          leading: Container(
-            width: 50.h,
-            height: 50.h,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.all(Radius.circular(25.r)),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: Hive.box<Acount>(HiveBoxes.acount)
-                            .getAt(0)
-                            ?.image_wish_friend ==
-                        null
-                    ? AssetImage("assets/images/profile.png")
-                    : MemoryImage(Hive.box<Acount>(HiveBoxes.acount)
-                        .getAt(0)!
-                        .image_wish_friend!),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(
+            context,
+          ).pushNamed(info_screen);
+        },
+        child: Container(
+          width: 236.w,
+          child: ListTile(
+            contentPadding: EdgeInsets.all(0),
+            leading: Container(
+              width: 50.h,
+              height: 50.h,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.all(Radius.circular(25.r)),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: Hive.box<Acount>(HiveBoxes.acount)
+                              .getAt(0)
+                              ?.image_wish_friend ==
+                          null
+                      ? AssetImage("assets/images/profile.png")
+                      : MemoryImage(Hive.box<Acount>(HiveBoxes.acount)
+                          .getAt(0)!
+                          .image_wish_friend!),
+                ),
               ),
             ),
+            title: Text(
+              Hive.box<Acount>(HiveBoxes.acount).getAt(0)!.name,
+              style: TextStyle(
+                  fontSize: 16.sp,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              "Your Profile",
+              style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+            ),
+            trailing: Icon(Icons.arrow_forward_ios_rounded,
+                size: 30.h, color: Colors.white),
           ),
-          title: Text(
-            Hive.box<Acount>(HiveBoxes.acount).getAt(0)!.name,
-            style: TextStyle(
-                fontSize: 16.sp,
-                color: Colors.white,
-                fontWeight: FontWeight.bold),
-          ),
-          subtitle: Text(
-            "Your Profile",
-            style: TextStyle(fontSize: 12.sp, color: Colors.grey),
-          ),
-          trailing: Icon(Icons.arrow_forward_ios_rounded,
-              size: 30.h, color: Colors.white),
         ),
       ),
     );
@@ -484,7 +491,11 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
         child: GestureDetector(
           onTap: () {
             print("Back pressed");
-            Navigator.pop(context);
+            Navigator.of(
+              context,
+            ).pushNamed(
+              home_screen,
+            );
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
