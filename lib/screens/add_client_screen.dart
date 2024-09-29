@@ -206,7 +206,7 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                                       ? Icons.expand_more_rounded
                                       : Icons.expand_less_rounded,
                                   color: Colors.white,
-                                  size: 30.w,
+                                  size: 30.h,
                                 ),
                               ),
                             ),

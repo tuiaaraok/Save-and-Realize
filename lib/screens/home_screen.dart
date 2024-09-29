@@ -69,34 +69,38 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: buildDrawer(),
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            _scaffoldKey.currentState!.openDrawer();
-          },
-          child: Column(
-            children: [
-              Text(
-                "Menu",
-                style: TextStyle(
-                    fontSize: 15.sp,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-              SvgPicture.asset(
-                'assets/icons/drawer.svg',
-              )
-            ],
-          ),
-        ),
-      ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.w),
+        padding: EdgeInsets.only(
+            left: 24.w, right: 24.w, top: MediaQuery.paddingOf(context).top),
         child: SingleChildScrollView(
           child: Container(
             width: 390.w,
             child: Column(
               children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: GestureDetector(
+                    onTap: () {
+                      _scaffoldKey.currentState!.openDrawer();
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Menu",
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SvgPicture.asset(
+                          'assets/icons/drawer.svg',
+                          height: 20.h,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: 36.h,
                 ),
@@ -173,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: Container(
-                    width: 370,
+                    width: 370.w,
                     child: Text(
                       "All the wishes",
                       style: kSubtitleStyle,
@@ -273,7 +277,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Container(
-                height: 29.h,
                 alignment: Alignment.center,
                 child: Text(
                   friend.name_wish,
@@ -350,12 +353,12 @@ class _HomeScreenState extends State<HomeScreen> {
             contentPadding: EdgeInsets.all(0),
             leading: Container(
               width: 50.h,
-              height: 50.h,
+              height: 50.r,
               decoration: BoxDecoration(
                 color: Colors.amber,
-                borderRadius: BorderRadius.all(Radius.circular(25.r)),
+                shape: BoxShape.circle,
                 image: DecorationImage(
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fitHeight,
                   image: Hive.box<Acount>(HiveBoxes.acount)
                               .getAt(0)
                               ?.image_wish_friend ==

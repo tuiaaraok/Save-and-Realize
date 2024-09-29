@@ -217,7 +217,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                                       ? Icons.expand_more_rounded
                                       : Icons.expand_less_rounded,
                                   color: Colors.white,
-                                  size: 30.w,
+                                  size: 30.h,
                                 ),
                               ),
                             ),

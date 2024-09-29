@@ -80,65 +80,104 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: buildDrawer(),
-      appBar: buildAppBar(),
+      // appBar: buildAppBar(),
       body: ValueListenableBuilder(
         valueListenable:
             Hive.box<FriendsWiches>(HiveBoxes.wishes_friends).listenable(),
         builder: (context, Box<FriendsWiches> box, _) {
           return Stack(
             children: [
-              SingleChildScrollView(
-                padding: EdgeInsets.all(8.0),
-                child: Container(
-                  width: 390.w,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 30.h),
-                      box.isEmpty
-                          ? Container(
-                              height: 370.h,
+              Padding(
+                padding:
+                    EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 390.w,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                _scaffoldKey.currentState!.openDrawer();
+                              },
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "#Empty",
+                                    "Menu",
                                     style: TextStyle(
+                                        fontSize: 15.sp,
                                         color: Colors.white,
-                                        fontSize: 32.sp,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(
-                                    height: 10.h,
+                                  SvgPicture.asset(
+                                    'assets/icons/drawer.svg',
+                                    height: 20.h,
                                   ),
-                                  Text(
-                                    "Add the first wish",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 16.sp,
-                                        fontWeight: FontWeight.bold),
-                                  )
                                 ],
                               ),
+                            ),
+                            Text(
+                              "The wish of friends",
+                              style: TextStyle(
+                                  color: Colors.grey, fontSize: 18.sp),
+                            ),
+                            SizedBox(
+                              width: 50.w,
                             )
-                          : buildGrid(box),
-                      Padding(
-                        padding: EdgeInsets.symmetric(vertical: 21.h),
-                        child: GestureDetector(
-                          onTap: () {
-                            Navigator.of(
-                              context,
-                            ).pushNamed(add_client_screen);
-                          },
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xFF5545B8).withOpacity(0.5),
-                            radius: 45.r,
-                            child: Icon(Icons.add,
-                                color: Colors.white, size: 36.h),
+                          ],
+                        ),
+                        SizedBox(height: 30.h),
+                        box.isEmpty
+                            ? Container(
+                                height: 370.h,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "#Empty",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 32.sp,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
+                                    Text(
+                                      "Add the first wish",
+                                      style: TextStyle(
+                                          color: Colors.grey,
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              )
+                            : buildGrid(box),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 21.h),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(
+                                context,
+                              ).pushNamed(add_client_screen);
+                            },
+                            child: CircleAvatar(
+                              backgroundColor:
+                                  Color(0xFF5545B8).withOpacity(0.5),
+                              radius: 45.r,
+                              child: Icon(Icons.add,
+                                  color: Colors.white, size: 36.h),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 60.h),
-                    ],
+                        SizedBox(height: 60.h),
+                      ],
+                    ),
                   ),
                 ),
               ),

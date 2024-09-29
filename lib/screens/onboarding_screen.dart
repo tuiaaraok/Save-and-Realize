@@ -137,8 +137,9 @@ class WidgetForOnBoardingInfo extends StatelessWidget {
             image: AssetImage(
               asset_image,
             ),
-            height: 280.w,
+            height: 280.h,
             width: 280.w,
+            fit: BoxFit.fitHeight,
           ),
           SizedBox(height: 30.h),
           Text(

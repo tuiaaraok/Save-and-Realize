@@ -48,7 +48,8 @@ class _CreateAcountScreenState extends State<CreateAcountScreen> {
                   image: AssetImage(
                     "assets/images/onboarding_name.png",
                   ),
-                  height: 250.w,
+                  fit: BoxFit.fitHeight,
+                  height: 250.h,
                   width: 250.w,
                 ),
                 SizedBox(

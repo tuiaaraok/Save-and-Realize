@@ -65,7 +65,7 @@ class _InfoScreenState extends State<InfoScreen> {
                       child: Stack(
                         children: [
                           Positioned(
-                            top: 20,
+                            top: 20.h,
                             child: Container(
                               width: 130.h,
                               height: 130.h,
@@ -96,7 +96,7 @@ class _InfoScreenState extends State<InfoScreen> {
                                     fit: BoxFit.fill,
                                     image: AssetImage("assets/icons/Image.png"),
                                     height: 20.h,
-                                    width: 20.w,
+                                    width: 20.h,
                                   ),
                                 ),
                               ))
