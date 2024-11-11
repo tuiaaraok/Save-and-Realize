@@ -6,14 +6,14 @@ part 'friends_wiches.g.dart';
 @HiveType(typeId: 1)
 class FriendsWiches {
   @HiveField(0)
-  final String name_friend;
+  final String nameFriend;
   @HiveField(1)
-  String whish_friend;
+  String whishFriend;
   @HiveField(2)
-  Uint8List image_wish_friend;
+  Uint8List imageWishFriend;
   FriendsWiches({
-    required this.name_friend,
-    required this.whish_friend,
-    required this.image_wish_friend,
+    required this.nameFriend,
+    required this.whishFriend,
+    required this.imageWishFriend,
   });
 }

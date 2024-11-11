@@ -1,5 +1,5 @@
 class HiveBoxes {
-  static String wishes_friends = 'wishes_friends';
-  static String my_wishes = 'my_wishes';
+  static String wishesFriends = 'wishes_friends';
+  static String myWishes = 'my_wishes';
   static String acount = 'acount';
 }

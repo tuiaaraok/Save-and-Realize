@@ -9,6 +9,8 @@ import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddClientScreen extends StatefulWidget {
+  const AddClientScreen({super.key});
+
   @override
   State<StatefulWidget> createState() => _AddClientScreenSatate();
 }
@@ -17,7 +19,7 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
   TextEditingController friendController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   DecorationImage? decorationImage;
-  String current_friend = '';
+  String currentFriend = '';
   Image? img;
   Uint8List? _image;
   int i = 0;
@@ -33,10 +35,10 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
     super.initState();
     _updateFormCompletion();
     Box<FriendsWiches> contactsBox =
-        Hive.box<FriendsWiches>(HiveBoxes.wishes_friends);
-    contactsBox.values.forEach((action) {
-      names.add(action.name_friend);
-    });
+        Hive.box<FriendsWiches>(HiveBoxes.wishesFriends);
+    for (var action in contactsBox.values) {
+      names.add(action.nameFriend);
+    }
     nameController.addListener(_updateFormCompletion);
     friendController.addListener(_updateFormCompletion);
   }
@@ -56,30 +58,29 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: 370.w,
                   child: Text(
                     "A new wish",
                     style: TextStyle(
                         fontSize: 24.sp,
-                        color: Color(0xFF5545B8),
+                        color: const Color(0xFF5545B8),
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                Container(
+                SizedBox(
                     width: 370.w,
                     child: GestureDetector(
                       onTap: () {
-                        print("F");
                         Navigator.pop(context);
                       },
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white,
                           ),
@@ -96,7 +97,7 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Container(
+                SizedBox(
                   width: 310.w,
                   child: Text(
                     "Name of wish",
@@ -134,16 +135,14 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 24.sp),
-                      onChanged: (text) {
-                        print(friendController.value.text);
-                      },
+                      onChanged: (text) {},
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 30.h,
                 ),
-                Container(
+                SizedBox(
                   width: 310.w,
                   child: Text(
                     "Friend's name",
@@ -189,9 +188,7 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24.sp),
-                              onChanged: (text) {
-                                print(nameController.value.text);
-                              },
+                              onChanged: (text) {},
                             ),
                           ),
                           Padding(
@@ -199,7 +196,7 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                             child: CircleAvatar(
                               radius: 15.r,
                               backgroundColor:
-                                  Color(0xFF5545B8).withOpacity(0.5),
+                                  const Color(0xFF5545B8).withOpacity(0.5),
                               child: Center(
                                 child: Icon(
                                   ispress
@@ -231,7 +228,7 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                             width: 150.w,
                             height: 45.h,
                             decoration: BoxDecoration(
-                                color: Color(0xFF5545B8).withOpacity(0.5),
+                                color: const Color(0xFF5545B8).withOpacity(0.5),
                                 border: toElement == nameController.text
                                     ? Border.all(color: Colors.white)
                                     : null,
@@ -268,11 +265,11 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                     }).toList(),
                   )
                 else
-                  SizedBox(),
+                  const SizedBox(),
                 SizedBox(
                   height: 60.h,
                 ),
-                Container(
+                SizedBox(
                   width: 310.w,
                   child: Text(
                     "Pick an image",
@@ -295,7 +292,7 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                     height: 170.h,
                     width: 140.w,
                     decoration: BoxDecoration(
-                      color: Color(0xFF5545B8).withOpacity(0.5),
+                      color: const Color(0xFF5545B8).withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(12.r)),
                       image: _image == null
                           ? decorationImage
@@ -306,7 +303,8 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                         child: CircleAvatar(
                       radius: 30.r,
                       backgroundColor: Colors.white.withOpacity(0.12),
-                      child: Image(image: AssetImage("assets/icons/Image.png")),
+                      child: const Image(
+                          image: AssetImage("assets/icons/Image.png")),
                     )),
                   ),
                 ),
@@ -317,15 +315,15 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                   onTap: () {
                     if (_updateFormCompletion()) {
                       Box<FriendsWiches> contactsBox =
-                          Hive.box<FriendsWiches>(HiveBoxes.wishes_friends);
+                          Hive.box<FriendsWiches>(HiveBoxes.wishesFriends);
                       FriendsWiches addwishfriend = FriendsWiches(
-                        whish_friend: friendController.text,
-                        name_friend: nameController.text,
-                        image_wish_friend: _image!,
+                        whishFriend: friendController.text,
+                        nameFriend: nameController.text,
+                        imageWishFriend: _image!,
                       );
                       contactsBox.add(addwishfriend);
                       Navigator.pop(context, true);
-                      Navigator.pushNamed(context, friends_wishes_screen);
+                      Navigator.pushNamed(context, friendsWishesScreen);
                     }
                   },
                   child: Container(
@@ -333,8 +331,8 @@ class _AddClientScreenSatate extends State<AddClientScreen> {
                     height: 60.h,
                     decoration: BoxDecoration(
                         color: _updateFormCompletion()
-                            ? Color(0xFF5545B8)
-                            : Color(0xFF5545B8).withOpacity(0.5),
+                            ? const Color(0xFF5545B8)
+                            : const Color(0xFF5545B8).withOpacity(0.5),
                         borderRadius: BorderRadius.all(Radius.circular(12.r))),
                     child: Center(
                       child: Text(

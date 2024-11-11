@@ -9,6 +9,8 @@ import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddMyWish extends StatefulWidget {
+  const AddMyWish({super.key});
+
   @override
   State<AddMyWish> createState() => _AddMyWishSatate();
 }
@@ -17,7 +19,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
   TextEditingController friendController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   DecorationImage? decorationImage;
-  String current_friend = '';
+  String currentFriend = '';
   Set<String> icons = {
     "Сlothes",
     "Сosmetics",
@@ -42,10 +44,10 @@ class _AddMyWishSatate extends State<AddMyWish> {
     category.addAll(icons);
     super.initState();
     _updateFormCompletion();
-    Box<MyWishes> contactsBox = Hive.box<MyWishes>(HiveBoxes.my_wishes);
-    contactsBox.values.forEach((action) {
-      category.add(action.name_category);
-    });
+    Box<MyWishes> contactsBox = Hive.box<MyWishes>(HiveBoxes.myWishes);
+    for (var action in contactsBox.values) {
+      category.add(action.nameCategory);
+    }
     nameController.addListener(_updateFormCompletion);
     friendController.addListener(_updateFormCompletion);
 
@@ -67,33 +69,32 @@ class _AddMyWishSatate extends State<AddMyWish> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             child: Column(
               children: [
-                Container(
+                SizedBox(
                   width: 370.w,
                   child: Text(
                     "A new wish",
                     style: TextStyle(
                         fontSize: 24.sp,
-                        color: Color(0xFF5545B8),
+                        color: const Color(0xFF5545B8),
                         fontWeight: FontWeight.bold),
                   ),
                 ),
                 SizedBox(
                   height: 20.h,
                 ),
-                Container(
+                SizedBox(
                     width: 370.w,
                     child: GestureDetector(
                       onTap: () {
-                        print("F");
                         Navigator.pop(context);
                       },
                       child: Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white,
                           ),
@@ -110,7 +111,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                 SizedBox(
                   height: 20.h,
                 ),
-                Container(
+                SizedBox(
                   width: 310.w,
                   child: Text(
                     "Name of wish",
@@ -145,16 +146,14 @@ class _AddMyWishSatate extends State<AddMyWish> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 24.sp),
-                      onChanged: (text) {
-                        print(friendController.value.text);
-                      },
+                      onChanged: (text) {},
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 30.h,
                 ),
-                Container(
+                SizedBox(
                   width: 310.w,
                   child: Text(
                     "Desire Category",
@@ -200,9 +199,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 24.sp),
-                              onChanged: (text) {
-                                print(nameController.value.text);
-                              },
+                              onChanged: (text) {},
                             ),
                           ),
                           Padding(
@@ -210,7 +207,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                             child: CircleAvatar(
                               radius: 15.r,
                               backgroundColor:
-                                  Color(0xFF5545B8).withOpacity(0.5),
+                                  const Color(0xFF5545B8).withOpacity(0.5),
                               child: Center(
                                 child: Icon(
                                   ispress
@@ -244,7 +241,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                             width: idx < 4 ? 150.w : 312.w,
                             height: 45.h,
                             decoration: BoxDecoration(
-                                color: Color(0xFF5545B8).withOpacity(0.5),
+                                color: const Color(0xFF5545B8).withOpacity(0.5),
                                 border: toElement == nameController.text
                                     ? Border.all(color: Colors.white)
                                     : null,
@@ -260,7 +257,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                                               horizontal: 10.w),
                                           child: Image(
                                             image: AssetImage(
-                                                "assets/icons/${toElement}.png"),
+                                                "assets/icons/$toElement.png"),
                                             height: 30.h,
                                             width: 30.h,
                                             fit: BoxFit.fill,
@@ -287,7 +284,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                                       ? SizedBox(
                                           width: 20.w,
                                         )
-                                      : SizedBox.shrink()
+                                      : const SizedBox.shrink()
                                 ],
                               ),
                             ),
@@ -297,11 +294,11 @@ class _AddMyWishSatate extends State<AddMyWish> {
                     }).toList(),
                   )
                 else
-                  SizedBox(),
+                  const SizedBox(),
                 SizedBox(
                   height: 60.h,
                 ),
-                Container(
+                SizedBox(
                   width: 310.w,
                   child: Text(
                     "Pick an image",
@@ -324,7 +321,7 @@ class _AddMyWishSatate extends State<AddMyWish> {
                     height: 170.h,
                     width: 140.w,
                     decoration: BoxDecoration(
-                      color: Color(0xFF5545B8).withOpacity(0.5),
+                      color: const Color(0xFF5545B8).withOpacity(0.5),
                       borderRadius: BorderRadius.all(Radius.circular(12.r)),
                       image: _image == null
                           ? decorationImage
@@ -335,7 +332,8 @@ class _AddMyWishSatate extends State<AddMyWish> {
                         child: CircleAvatar(
                       radius: 30.r,
                       backgroundColor: Colors.white.withOpacity(0.12),
-                      child: Image(image: AssetImage("assets/icons/Image.png")),
+                      child: const Image(
+                          image: AssetImage("assets/icons/Image.png")),
                     )),
                   ),
                 ),
@@ -346,17 +344,17 @@ class _AddMyWishSatate extends State<AddMyWish> {
                   onTap: () {
                     if (_updateFormCompletion()) {
                       Box<MyWishes> contactsBox =
-                          Hive.box<MyWishes>(HiveBoxes.my_wishes);
+                          Hive.box<MyWishes>(HiveBoxes.myWishes);
                       MyWishes addwishfriend = MyWishes(
-                        name_wish: friendController.text,
-                        name_category: nameController.text,
-                        my_image_wish: _image!,
+                        nameWish: friendController.text,
+                        nameCategory: nameController.text,
+                        myImageWish: _image!,
                       );
                       contactsBox.add(addwishfriend);
                       Navigator.of(
                         context,
                       ).pop();
-                      Navigator.pushNamed(context, home_screen);
+                      Navigator.pushNamed(context, homeScreen);
                     }
                   },
                   child: Container(
@@ -364,8 +362,8 @@ class _AddMyWishSatate extends State<AddMyWish> {
                     height: 60.h,
                     decoration: BoxDecoration(
                         color: _updateFormCompletion()
-                            ? Color(0xFF5545B8)
-                            : Color(0xFF5545B8).withOpacity(0.5),
+                            ? const Color(0xFF5545B8)
+                            : const Color(0xFF5545B8).withOpacity(0.5),
                         borderRadius: BorderRadius.all(Radius.circular(12.r))),
                     child: Center(
                       child: Text(

@@ -5,7 +5,10 @@ import 'package:flutter_application_1/utilities/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OnboardingScreen extends StatefulWidget {
+  const OnboardingScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
 
@@ -24,13 +27,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
+      duration: const Duration(milliseconds: 150),
       margin: EdgeInsets.symmetric(horizontal: 4.w),
       height: isActive ? 8.0.h : 10.h,
       width: isActive ? 35.w : 10.h,
       decoration: BoxDecoration(
-        color: isActive ? Color(0xFF5545B8) : Colors.grey,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        color: isActive ? const Color(0xFF5545B8) : Colors.grey,
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
@@ -41,30 +44,30 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Container(
-          decoration: BoxDecoration(color: Colors.black),
+          decoration: const BoxDecoration(color: Colors.black),
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Container(
+                SizedBox(
                   height: 650.h,
                   child: PageView(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     controller: _pageController,
                     onPageChanged: (int page) {
                       setState(() {
                         _currentPage = page;
                       });
                     },
-                    children: <Widget>[
+                    children: const <Widget>[
                       WidgetForOnBoardingInfo(
-                        asset_image: 'assets/images/onboarding1.png',
+                        assetImage: 'assets/images/onboarding1.png',
                         title: 'Create your first wishlist',
                         subtitle:
                             'Create your own collections\nof wishes and make them\ncome true!',
                       ),
                       WidgetForOnBoardingInfo(
-                        asset_image: 'assets/images/onboarding2.png',
+                        assetImage: 'assets/images/onboarding2.png',
                         title: 'Create your first wishlist',
                         subtitle:
                             "Organize your and your friends'\nwishes into collections for\nconvenience and quick access!",
@@ -82,10 +85,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     child: GestureDetector(
                       onTap: () {
                         if (_currentPage == 1) {
-                          Navigator.pushNamed(context, create_acount_screen);
+                          Navigator.pushNamed(context, createAcountScreen);
                         }
                         _pageController.nextPage(
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
                       },
@@ -93,7 +96,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         width: 320.w,
                         height: 60.h,
                         decoration: BoxDecoration(
-                            color: Color(0xFF5545B8),
+                            color: const Color(0xFF5545B8),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(12.r))),
                         child: Center(
@@ -121,10 +124,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 class WidgetForOnBoardingInfo extends StatelessWidget {
   final String title;
   final String subtitle;
-  final String asset_image;
+  final String assetImage;
 
-  WidgetForOnBoardingInfo(
-      {required this.title, required this.subtitle, required this.asset_image});
+  const WidgetForOnBoardingInfo(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.assetImage});
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +141,7 @@ class WidgetForOnBoardingInfo extends StatelessWidget {
         children: <Widget>[
           Image(
             image: AssetImage(
-              asset_image,
+              assetImage,
             ),
             height: 280.h,
             width: 280.w,
@@ -148,12 +154,10 @@ class WidgetForOnBoardingInfo extends StatelessWidget {
             style: kTitleStyle,
           ),
           SizedBox(height: 15.h),
-          Container(
-            child: Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: kSubtitleStyle,
-            ),
+          Text(
+            subtitle,
+            textAlign: TextAlign.center,
+            style: kSubtitleStyle,
           ),
         ],
       ),

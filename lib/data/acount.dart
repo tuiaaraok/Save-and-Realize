@@ -8,9 +8,9 @@ class Acount {
   @HiveField(0)
   final String name;
   @HiveField(1)
-  Uint8List? image_wish_friend;
+  Uint8List? imageWishFriend;
   Acount({
     required this.name,
-    this.image_wish_friend,
+    this.imageWishFriend,
   });
 }

@@ -6,14 +6,14 @@ part 'my_wishes.g.dart';
 @HiveType(typeId: 2)
 class MyWishes {
   @HiveField(0)
-  String name_wish;
+  String nameWish;
   @HiveField(1)
-  String name_category;
+  String nameCategory;
   @HiveField(2)
-  Uint8List my_image_wish;
+  Uint8List myImageWish;
   MyWishes({
-    required this.name_wish,
-    required this.name_category,
-    required this.my_image_wish,
+    required this.nameWish,
+    required this.nameCategory,
+    required this.myImageWish,
   });
 }

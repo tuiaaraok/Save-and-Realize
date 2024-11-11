@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 
 class DeleteFriendWish extends StatefulWidget {
-  DeleteFriendWish({required this.index});
+  const DeleteFriendWish({super.key, required this.index});
   final int index;
   @override
   State<DeleteFriendWish> createState() => _DeleteFriendWishState();
@@ -24,33 +24,33 @@ class _DeleteFriendWishState extends State<DeleteFriendWish> {
     super.initState();
 
     Box<FriendsWiches> contactsBox =
-        Hive.box<FriendsWiches>(HiveBoxes.wishes_friends);
-    _image = contactsBox.getAt(widget.index)!.image_wish_friend;
-    wish = contactsBox.getAt(widget.index)!.whish_friend;
-    name = contactsBox.getAt(widget.index)!.name_friend;
+        Hive.box<FriendsWiches>(HiveBoxes.wishesFriends);
+    _image = contactsBox.getAt(widget.index)!.imageWishFriend;
+    wish = contactsBox.getAt(widget.index)!.whishFriend;
+    name = contactsBox.getAt(widget.index)!.nameFriend;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: SizedBox.shrink(),
-        title: Text(
+        leading: const SizedBox.shrink(),
+        title: const Text(
           "Wish",
           style: TextStyle(color: Colors.grey),
         ),
       ),
-      body: Container(
+      body: SizedBox(
         width: double.maxFinite,
         height: 844.h,
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: double.maxFinite,
               child: Padding(
                 padding: EdgeInsets.only(left: 10.w, top: 10.h),
                 child: Text(
-                  name + ":",
+                  "$name:",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 24.sp,
@@ -68,17 +68,18 @@ class _DeleteFriendWishState extends State<DeleteFriendWish> {
                   height: 180.h,
                   width: 140.w,
                   decoration: BoxDecoration(
-                    color: Color(0xFF5545B8).withOpacity(0.5),
+                    color: const Color(0xFF5545B8).withOpacity(0.5),
                     borderRadius: BorderRadius.all(Radius.circular(12.r)),
                     image: DecorationImage(
-                        image: MemoryImage(_image!), fit: BoxFit.cover),
+                        image: MemoryImage(_image), fit: BoxFit.cover),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     wish,
-                    style: TextStyle(fontSize: 18.sp, color: Color(0xFF5545B8)),
+                    style: TextStyle(
+                        fontSize: 18.sp, color: const Color(0xFF5545B8)),
                   ),
                 )
               ],
@@ -86,7 +87,7 @@ class _DeleteFriendWishState extends State<DeleteFriendWish> {
             SizedBox(
               height: 70.h,
             ),
-            Container(
+            SizedBox(
               width: 310.w,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,28 +117,27 @@ class _DeleteFriendWishState extends State<DeleteFriendWish> {
             ),
             GestureDetector(
               onTap: () {
-                print("ho");
                 showDialog(
                     context: context,
                     builder: (BuildContext context) => CustomDialog(
                           index: widget.index,
                         ));
               },
-              child: Container(
+              child: SizedBox(
                 width: 236.w,
                 child: Center(
                   child: CircleAvatar(
                     radius: 35.r,
-                    backgroundColor: Color(0xFFD9D9D9),
+                    backgroundColor: const Color(0xFFD9D9D9),
                     child: Center(
                       child: Image(
-                        image: AssetImage(
+                        image: const AssetImage(
                           "assets/icons/Delete.png",
                         ),
                         height: 40.h,
                         width: 40.h,
                         fit: BoxFit.fitHeight,
-                        color: Color(0xFF5545B8),
+                        color: const Color(0xFF5545B8),
                       ),
                     ),
                   ),
@@ -147,12 +147,11 @@ class _DeleteFriendWishState extends State<DeleteFriendWish> {
             Expanded(
               child: Align(
                 alignment: AlignmentDirectional.bottomStart,
-                child: Container(
+                child: SizedBox(
                   width: double.maxFinite,
                   height: 60.h,
                   child: GestureDetector(
                     onTap: () {
-                      print("Back pressed");
                       Navigator.pop(
                         context,
                       );
@@ -185,8 +184,9 @@ class _DeleteFriendWishState extends State<DeleteFriendWish> {
   }
 }
 
+// ignore: must_be_immutable
 class CustomDialog extends StatelessWidget {
-  CustomDialog({required this.index});
+  CustomDialog({super.key, required this.index});
   int index;
   @override
   Widget build(BuildContext context) {
@@ -200,21 +200,21 @@ class CustomDialog extends StatelessWidget {
 
   Widget dialogContent(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 0.0, right: 0.0),
+      margin: const EdgeInsets.only(left: 0.0, right: 0.0),
       child: Stack(
         children: <Widget>[
           Container(
             height: 300.h,
             width: 310.w,
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               top: 18.0,
             ),
-            margin: EdgeInsets.only(top: 13.0, right: 8.0),
+            margin: const EdgeInsets.only(top: 13.0, right: 8.0),
             decoration: BoxDecoration(
-                color: Color.fromARGB(255, 45, 36, 104),
+                color: const Color.fromARGB(255, 45, 36, 104),
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(16.0),
-                boxShadow: <BoxShadow>[
+                boxShadow: const <BoxShadow>[
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 0.0,
@@ -225,9 +225,9 @@ class CustomDialog extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: new Text("Are you sure you\nwant to remove the\nwish?",
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text("Are you sure you\nwant to remove the\nwish?",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 30.0,
@@ -237,15 +237,18 @@ class CustomDialog extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     final constain =
-                        Hive.box<FriendsWiches>(HiveBoxes.wishes_friends);
+                        Hive.box<FriendsWiches>(HiveBoxes.wishesFriends);
                     constain.deleteAt(index).whenComplete(() {
                       Navigator.pop(
+                        // ignore: use_build_context_synchronously
                         context,
                       );
                       Navigator.pop(
+                        // ignore: use_build_context_synchronously
                         context,
                       );
-                      Navigator.pushNamed(context, friends_wishes_screen);
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamed(context, friendsWishesScreen);
                     });
                   },
                   child: Container(
@@ -301,21 +304,19 @@ class CustomDialog extends StatelessWidget {
               },
               child: Align(
                 alignment: Alignment.topRight,
-                child: Container(
-                  child: Center(
-                    child: CircleAvatar(
-                      radius: 15.r,
-                      backgroundColor: Color(0xFFD9D9D9),
-                      child: Center(
-                        child: Image(
-                          image: AssetImage(
-                            "assets/icons/Delete.png",
-                          ),
-                          height: 18.h,
-                          width: 18.h,
-                          fit: BoxFit.fitHeight,
-                          color: Color(0xFF5545B8),
+                child: Center(
+                  child: CircleAvatar(
+                    radius: 15.r,
+                    backgroundColor: const Color(0xFFD9D9D9),
+                    child: Center(
+                      child: Image(
+                        image: const AssetImage(
+                          "assets/icons/Delete.png",
                         ),
+                        height: 18.h,
+                        width: 18.h,
+                        fit: BoxFit.fitHeight,
+                        color: const Color(0xFF5545B8),
                       ),
                     ),
                   ),

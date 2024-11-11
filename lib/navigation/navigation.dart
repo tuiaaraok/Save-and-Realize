@@ -9,62 +9,62 @@ import 'package:flutter_application_1/screens/add_my_wish.dart';
 import 'package:flutter_application_1/screens/delete_friend_wish.dart';
 import 'package:flutter_application_1/screens/delete_my_wish.dart';
 
-const String onboarding_screen = "/onboarding-screen";
-const String info_screen = "/info-screen";
-const String home_screen = "/home-screen";
-const String add_my_wish = "/add-my-wish";
-const String add_client_screen = "/add-client-screen";
-const String delete_my_wish = "/delete-my-wish";
-const String delete_friend_wish = "/delete-friend-wish";
-const String friends_wishes_screen = "/friends-wishes-screen";
-const String create_acount_screen = "/create-acount-screen";
+const String onboardingScreen = "/onboarding-screen";
+const String infoScreen = "/info-screen";
+const String homeScreen = "/home-screen";
+const String addMyWish = "/add-my-wish";
+const String addClientScreen = "/add-client-screen";
+const String deleteMyWish = "/delete-my-wish";
+const String deleteFriendWish = "/delete-friend-wish";
+const String friendsWishesScreen = "/friends-wishes-screen";
+const String createAcountScreen = "/create-acount-screen";
 
 class NavigationApp {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case onboarding_screen:
+      case onboardingScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return OnboardingScreen();
+            return const OnboardingScreen();
           },
           settings: settings,
         );
-      case create_acount_screen:
+      case createAcountScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return CreateAcountScreen();
+            return const CreateAcountScreen();
           },
           settings: settings,
         );
-      case info_screen:
+      case infoScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return InfoScreen();
+            return const InfoScreen();
           },
           settings: settings,
         );
-      case home_screen:
+      case homeScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return HomeScreen();
+            return const HomeScreen();
           },
           settings: settings,
         );
-      case add_my_wish:
+      case addMyWish:
         return MaterialPageRoute(
           builder: (_) {
-            return AddMyWish();
+            return const AddMyWish();
           },
           settings: settings,
         );
-      case add_client_screen:
+      case addClientScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return AddClientScreen();
+            return const AddClientScreen();
           },
           settings: settings,
         );
-      case delete_my_wish:
+      case deleteMyWish:
         var args = settings.arguments as int;
         return MaterialPageRoute(
           builder: (_) {
@@ -74,7 +74,7 @@ class NavigationApp {
           },
           settings: settings,
         );
-      case delete_friend_wish:
+      case deleteFriendWish:
         var args = settings.arguments as int;
         return MaterialPageRoute(
           builder: (_) {
@@ -84,17 +84,17 @@ class NavigationApp {
           },
           settings: settings,
         );
-      case friends_wishes_screen:
+      case friendsWishesScreen:
         return MaterialPageRoute(
           builder: (_) {
-            return FriendsWishesScreen();
+            return const FriendsWishesScreen();
           },
           settings: settings,
         );
       default:
         return MaterialPageRoute(
           builder: (_) {
-            return OnboardingScreen();
+            return const OnboardingScreen();
           },
           settings: settings,
         );

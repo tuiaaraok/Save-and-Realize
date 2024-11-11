@@ -17,9 +17,9 @@ class FriendsWichesAdapter extends TypeAdapter<FriendsWiches> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return FriendsWiches(
-      name_friend: fields[0] as String,
-      whish_friend: fields[1] as String,
-      image_wish_friend: fields[2] as Uint8List,
+      nameFriend: fields[0] as String,
+      whishFriend: fields[1] as String,
+      imageWishFriend: fields[2] as Uint8List,
     );
   }
 
@@ -28,11 +28,11 @@ class FriendsWichesAdapter extends TypeAdapter<FriendsWiches> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.name_friend)
+      ..write(obj.nameFriend)
       ..writeByte(1)
-      ..write(obj.whish_friend)
+      ..write(obj.whishFriend)
       ..writeByte(2)
-      ..write(obj.image_wish_friend);
+      ..write(obj.imageWishFriend);
   }
 
   @override

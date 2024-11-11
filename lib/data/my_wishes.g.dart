@@ -17,9 +17,9 @@ class MyWishesAdapter extends TypeAdapter<MyWishes> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MyWishes(
-      name_wish: fields[0] as String,
-      name_category: fields[1] as String,
-      my_image_wish: fields[2] as Uint8List,
+      nameWish: fields[0] as String,
+      nameCategory: fields[1] as String,
+      myImageWish: fields[2] as Uint8List,
     );
   }
 
@@ -28,11 +28,11 @@ class MyWishesAdapter extends TypeAdapter<MyWishes> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.name_wish)
+      ..write(obj.nameWish)
       ..writeByte(1)
-      ..write(obj.name_category)
+      ..write(obj.nameCategory)
       ..writeByte(2)
-      ..write(obj.my_image_wish);
+      ..write(obj.myImageWish);
   }
 
   @override

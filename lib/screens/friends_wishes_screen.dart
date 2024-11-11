@@ -1,77 +1,53 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1/boxes.dart';
 import 'package:flutter_application_1/data/acount.dart';
 import 'package:flutter_application_1/data/friends_wiches.dart';
 import 'package:flutter_application_1/navigation/navigation.dart';
-import 'package:flutter_application_1/utilities/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/boxes.dart';
-import 'package:flutter_application_1/data/friends_wiches.dart';
-import 'package:flutter_application_1/utilities/styles.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/boxes.dart';
-import 'package:flutter_application_1/data/friends_wiches.dart';
-import 'package:flutter_application_1/utilities/styles.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class FriendsWishesScreen extends StatefulWidget {
-  FriendsWishesScreen({super.key});
+  const FriendsWishesScreen({super.key});
 
   @override
   State<FriendsWishesScreen> createState() => _FriendsWishesScreenState();
 }
 
 class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
-  Set<String> friends_names = {};
+  Set<String> friendsNames = {};
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  bool remove_btn = false;
-  Set<String> remove_elements = {};
-  Set<String> sort_names = {};
+  bool removeBtn = false;
+  Set<String> removeElements = {};
+  Set<String> sortNames = {};
   late Box<FriendsWiches> contactsBox;
 
   @override
   void initState() {
     super.initState();
-    contactsBox = Hive.box<FriendsWiches>(HiveBoxes.wishes_friends);
+    contactsBox = Hive.box<FriendsWiches>(HiveBoxes.wishesFriends);
 
-    contactsBox.values.forEach((toElement) {
-      friends_names.add(toElement.name_friend);
-    });
+    for (var toElement in contactsBox.values) {
+      friendsNames.add(toElement.nameFriend);
+    }
   }
 
   void deleteSelectedFriends() {
     // Create a list of keys to delete
 
     for (int i = 0; i < contactsBox.length.toInt(); i++) {
-      if (remove_elements.contains(contactsBox.getAt(i)!.name_friend)) {
+      if (removeElements.contains(contactsBox.getAt(i)!.nameFriend)) {
         contactsBox.deleteAt(i);
 
         i--;
       }
     }
     setState(() {
-      friends_names.removeAll(remove_elements);
+      friendsNames.removeAll(removeElements);
 
-      remove_elements.clear(); // Clear selected names
-      remove_btn = false; // Reset remove mode
+      removeElements.clear(); // Clear selected names
+      removeBtn = false; // Reset remove mode
     });
   }
 
@@ -83,7 +59,7 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
       // appBar: buildAppBar(),
       body: ValueListenableBuilder(
         valueListenable:
-            Hive.box<FriendsWiches>(HiveBoxes.wishes_friends).listenable(),
+            Hive.box<FriendsWiches>(HiveBoxes.wishesFriends).listenable(),
         builder: (context, Box<FriendsWiches> box, _) {
           return Stack(
             children: [
@@ -91,8 +67,8 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
                 padding:
                     EdgeInsets.only(top: MediaQuery.paddingOf(context).top),
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(8.0),
-                  child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
                     width: 390.w,
                     child: Column(
                       children: [
@@ -132,7 +108,7 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
                         ),
                         SizedBox(height: 30.h),
                         box.isEmpty
-                            ? Container(
+                            ? SizedBox(
                                 height: 370.h,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -164,11 +140,11 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
                             onTap: () {
                               Navigator.of(
                                 context,
-                              ).pushNamed(add_client_screen);
+                              ).pushNamed(addClientScreen);
                             },
                             child: CircleAvatar(
                               backgroundColor:
-                                  Color(0xFF5545B8).withOpacity(0.5),
+                                  const Color(0xFF5545B8).withOpacity(0.5),
                               radius: 45.r,
                               child: Icon(Icons.add,
                                   color: Colors.white, size: 36.h),
@@ -220,7 +196,7 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
       children: [
         Container(
           width: 276.w,
-          color: Color.fromARGB(255, 38, 16, 95),
+          color: const Color.fromARGB(255, 38, 16, 95),
           child: SafeArea(
             child: Column(
               children: [
@@ -270,12 +246,12 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
         onTap: () {
           Navigator.of(
             context,
-          ).pushNamed(info_screen);
+          ).pushNamed(infoScreen);
         },
-        child: Container(
+        child: SizedBox(
           width: 236.w,
           child: ListTile(
-            contentPadding: EdgeInsets.all(0),
+            contentPadding: const EdgeInsets.all(0),
             leading: Container(
               width: 50.h,
               height: 50.h,
@@ -286,12 +262,12 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
                   fit: BoxFit.cover,
                   image: Hive.box<Acount>(HiveBoxes.acount)
                               .getAt(0)
-                              ?.image_wish_friend ==
+                              ?.imageWishFriend ==
                           null
-                      ? AssetImage("assets/images/profile.png")
+                      ? const AssetImage("assets/images/profile.png")
                       : MemoryImage(Hive.box<Acount>(HiveBoxes.acount)
                           .getAt(0)!
-                          .image_wish_friend!),
+                          .imageWishFriend!),
                 ),
               ),
             ),
@@ -317,10 +293,10 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
   Padding buildFriendsList() {
     return Padding(
       padding: EdgeInsets.only(left: 27.w, right: 14.w, top: 22.h),
-      child: Container(
+      child: SizedBox(
         height: 537.h,
         child: ListView.builder(
-          itemCount: friends_names.length,
+          itemCount: friendsNames.length,
           itemBuilder: (BuildContext context, int index) {
             return buildFriendTile(index);
           },
@@ -334,14 +310,14 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
       padding: EdgeInsets.symmetric(vertical: 11.h),
       child: GestureDetector(
         onTap: () {
-          if (remove_btn) {
-            remove_elements.contains(friends_names.elementAt(index))
-                ? remove_elements.remove(friends_names.elementAt(index))
-                : remove_elements.add(friends_names.elementAt(index));
+          if (removeBtn) {
+            removeElements.contains(friendsNames.elementAt(index))
+                ? removeElements.remove(friendsNames.elementAt(index))
+                : removeElements.add(friendsNames.elementAt(index));
           } else {
-            sort_names.contains(friends_names.elementAt(index))
-                ? sort_names.remove(friends_names.elementAt(index))
-                : sort_names.add(friends_names.elementAt(index));
+            sortNames.contains(friendsNames.elementAt(index))
+                ? sortNames.remove(friendsNames.elementAt(index))
+                : sortNames.add(friendsNames.elementAt(index));
           }
           setState(() {});
         },
@@ -350,9 +326,9 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
           decoration: BoxDecoration(
             color: Colors.black26,
             borderRadius: BorderRadius.all(Radius.circular(36.r)),
-            border: remove_elements.contains(friends_names.elementAt(index))
+            border: removeElements.contains(friendsNames.elementAt(index))
                 ? Border.all(color: Colors.red)
-                : sort_names.contains(friends_names.elementAt(index))
+                : sortNames.contains(friendsNames.elementAt(index))
                     ? Border.all(color: Colors.white)
                     : null,
           ),
@@ -363,7 +339,7 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
               Icon(Icons.person_rounded, size: 30.h, color: Colors.white),
               Expanded(
                 child: Text(
-                  friends_names.elementAt(index),
+                  friendsNames.elementAt(index),
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
@@ -382,12 +358,12 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
       child: GestureDetector(
         onTap: () {
           setState(() {
-            sort_names = {};
-            remove_elements = {};
-            remove_btn = !remove_btn;
+            sortNames = {};
+            removeElements = {};
+            removeBtn = !removeBtn;
           });
         },
-        child: Container(
+        child: SizedBox(
           width: 236.w,
           child: Center(
             child: CircleAvatar(
@@ -395,8 +371,8 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
               backgroundColor: Colors.grey,
               child: Center(
                 child: Image(
-                  image: AssetImage("assets/icons/Delete.png"),
-                  color: remove_btn ? Colors.red : Color(0xFF5545B8),
+                  image: const AssetImage("assets/icons/Delete.png"),
+                  color: removeBtn ? Colors.red : const Color(0xFF5545B8),
                 ),
               ),
             ),
@@ -409,7 +385,7 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
   GestureDetector buildActionButton() {
     return GestureDetector(
       onTap: () {
-        if (remove_btn) {
+        if (removeBtn) {
           deleteSelectedFriends();
         }
         _scaffoldKey.currentState!.closeDrawer();
@@ -418,16 +394,16 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
         width: 214.w,
         height: 45.h,
         decoration: BoxDecoration(
-          color: remove_btn && remove_elements.isEmpty
-              ? Color(0xFF5545B8).withOpacity(0.5)
-              : Color(0xFF5545B8),
+          color: removeBtn && removeElements.isEmpty
+              ? const Color(0xFF5545B8).withOpacity(0.5)
+              : const Color(0xFF5545B8),
           borderRadius: BorderRadius.all(Radius.circular(12.r)),
         ),
         child: Center(
           child: Text(
-            remove_btn
+            removeBtn
                 ? "Delete"
-                : sort_names.isEmpty
+                : sortNames.isEmpty
                     ? 'Go Back'
                     : "Sort",
             style: TextStyle(
@@ -444,15 +420,15 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
     List<FriendsWiches> friends = box.values.toList();
 
     // Если выбраны имена для сортировки
-    if (sort_names.isNotEmpty) {
+    if (sortNames.isNotEmpty) {
       friends = friends
-          .where((friend) => sort_names.contains(friend.name_friend))
+          .where((friend) => sortNames.contains(friend.nameFriend))
           .toList();
     }
 
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: (140.w / 199.h),
@@ -463,7 +439,7 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
         if (index < friends.length) {
           return buildFriendCard(friends[index], index);
         } else {
-          return SizedBox.shrink(); // Безопасно возвращаем пустой вид
+          return const SizedBox.shrink(); // Безопасно возвращаем пустой вид
         }
       },
     );
@@ -476,45 +452,43 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
         onTap: () {
           Navigator.of(
             context,
-          ).pushNamed(delete_friend_wish, arguments: index);
+          ).pushNamed(deleteFriendWish, arguments: index);
         },
-        child: Container(
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                    image: DecorationImage(
-                      image: MemoryImage(friend.image_wish_friend),
-                      fit: BoxFit.cover,
+        child: Column(
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(12.r)),
+                  image: DecorationImage(
+                    image: MemoryImage(friend.imageWishFriend),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              height: 29.h,
+              alignment: Alignment.center,
+              child: RichText(
+                text: TextSpan(
+                  text: friend.nameFriend,
+                  style: TextStyle(color: Colors.white, fontSize: 21.sp),
+                  children: [
+                    TextSpan(
+                      text: "/",
+                      style: TextStyle(color: Colors.grey, fontSize: 21.sp),
                     ),
-                  ),
+                    TextSpan(
+                      text: friend.whishFriend,
+                      style: TextStyle(
+                          color: const Color(0xFF5545B8), fontSize: 21.sp),
+                    ),
+                  ],
                 ),
               ),
-              Container(
-                height: 29.h,
-                alignment: Alignment.center,
-                child: RichText(
-                  text: TextSpan(
-                    text: friend.name_friend,
-                    style: TextStyle(color: Colors.white, fontSize: 21.sp),
-                    children: [
-                      TextSpan(
-                        text: "/",
-                        style: TextStyle(color: Colors.grey, fontSize: 21.sp),
-                      ),
-                      TextSpan(
-                        text: friend.whish_friend,
-                        style: TextStyle(
-                            color: Color(0xFF5545B8), fontSize: 21.sp),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -529,11 +503,10 @@ class _FriendsWishesScreenState extends State<FriendsWishesScreen> {
         color: Colors.black,
         child: GestureDetector(
           onTap: () {
-            print("Back pressed");
             Navigator.of(
               context,
             ).pushNamed(
-              home_screen,
+              homeScreen,
             );
           },
           child: Padding(

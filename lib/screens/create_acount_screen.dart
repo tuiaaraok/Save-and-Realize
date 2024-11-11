@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/boxes.dart';
 import 'package:flutter_application_1/data/acount.dart';
 import 'package:flutter_application_1/navigation/navigation.dart';
-import 'package:flutter_application_1/screens/onboarding_screen.dart';
 import 'package:flutter_application_1/utilities/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 
 class CreateAcountScreen extends StatefulWidget {
-  CreateAcountScreen({
+  const CreateAcountScreen({
     super.key,
   });
 
@@ -37,7 +36,7 @@ class _CreateAcountScreenState extends State<CreateAcountScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
+        child: SizedBox(
           width: 390.w,
           height: 844.h,
           child: SingleChildScrollView(
@@ -45,7 +44,7 @@ class _CreateAcountScreenState extends State<CreateAcountScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Image(
-                  image: AssetImage(
+                  image: const AssetImage(
                     "assets/images/onboarding_name.png",
                   ),
                   fit: BoxFit.fitHeight,
@@ -66,7 +65,7 @@ class _CreateAcountScreenState extends State<CreateAcountScreen> {
                       'Enter your name',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: Color(0xFF5545B8),
+                        color: const Color(0xFF5545B8),
                         fontSize: 18.sp,
                       ),
                     ),
@@ -75,7 +74,7 @@ class _CreateAcountScreenState extends State<CreateAcountScreen> {
                 SizedBox(
                   height: 80.h,
                 ),
-                Container(
+                SizedBox(
                   width: 310.w,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -110,9 +109,7 @@ class _CreateAcountScreenState extends State<CreateAcountScreen> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 24.sp),
-                            onChanged: (text) {
-                              print(nameController.value.text);
-                            },
+                            onChanged: (text) {},
                           ),
                         ),
                       ),
@@ -123,15 +120,15 @@ class _CreateAcountScreenState extends State<CreateAcountScreen> {
                         onTap: () {
                           Hive.box<Acount>(HiveBoxes.acount)
                               .add(Acount(name: nameController.text));
-                          Navigator.pushNamed(context, home_screen);
+                          Navigator.pushNamed(context, homeScreen);
                         },
                         child: Container(
                           width: 320.w,
                           height: 60.h,
                           decoration: BoxDecoration(
                               color: nameController.text == ''
-                                  ? Color(0xFF5545B8).withOpacity(0.5)
-                                  : Color(0xFF5545B8),
+                                  ? const Color(0xFF5545B8).withOpacity(0.5)
+                                  : const Color(0xFF5545B8),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12.r))),
                           child: Center(

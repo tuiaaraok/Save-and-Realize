@@ -18,7 +18,7 @@ class AcountAdapter extends TypeAdapter<Acount> {
     };
     return Acount(
       name: fields[0] as String,
-      image_wish_friend: fields[1] as Uint8List?,
+      imageWishFriend: fields[1] as Uint8List?,
     );
   }
 
@@ -29,7 +29,7 @@ class AcountAdapter extends TypeAdapter<Acount> {
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
-      ..write(obj.image_wish_friend);
+      ..write(obj.imageWishFriend);
   }
 
   @override
